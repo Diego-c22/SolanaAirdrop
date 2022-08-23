@@ -8,3 +8,10 @@ const {
 
 // create a new wallet
 const wallet = new Keypair()
+
+// get public Key
+const publicKey = wallet.publicKey
+// get secretKey
+const secretKey = wallet._keypair.secretKey
+
+console.log(publicKey, secretKey)
