@@ -14,10 +14,15 @@ const publicKey = wallet.publicKey
 // get secretKey
 const secretKey = wallet._keypair.secretKey
 
+// Create collection to Solana network
+const getConnection = () => {
+  return new Connection(clusterApiUrl('devnet'), 'confirmed')
+}
+
 const getWalletBalance = async () => {
   try {
     // create a connection
-    const connection = new Connection(clusterApiUrl('devnet'), 'confirmed')
+    const connection = getConnection()
     // get balance
     const walletBalance = await connection.getBalance(publicKey)
     return walletBalance
@@ -30,7 +35,7 @@ const getWalletBalance = async () => {
 const airDropSol = async () => {
   try {
     // create a connection
-    const connection = new Connection(clusterApiUrl('devnet'), 'confirmed')
+    const connection = getConnection()
     const fromAirDropSignature = await connection.requestAirdrop(publicKey, 2 * LAMPORTS_PER_SOL)
 
     const latestBlockHash = await connection.getLatestBlockhash();
